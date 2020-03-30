@@ -59,4 +59,6 @@ def shortest_path_optmized(start, end):
     You can use the rubik.quarter_twists move set.
     Each move can be applied using rubik.perm_apply
     """
+    # simultaneous bfs from both the ends and maintain visted_nodes_1 and 2.
+    # when node is discovered while bfs of start check if it is present in visite_nodes_2 and vice versa to check meeting point
     raise NotImplementedError
