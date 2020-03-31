@@ -26,28 +26,28 @@ def shortest_path(start, end):
         # all neighbours of u
         for moves in rubik.quarter_twists:
             v = rubik.perm_apply(moves, u)
-            idx = visited_nodes.find(v)
+            #idx = visited_nodes.find(v)
             # if v is a white node
-            if (idx == -1):
+            if not(v in visited_nodes):
                 visited_nodes.append(v)
                 status.append(False)    # make v a gray naode
-                parent.append(visited_nodes.find(u))    # insert parent
-                move_taken.append(rubik.quarter_twists_names[moves])    # insert taken move from u to v
+                parent.append(visited_nodes.index(u))    # insert parent
+                move_taken.append(list(moves))    # insert taken move from u to v
                 queue.append(v)
-        status[visited_nodes.find(u)] = True    # make u a black node
+        status[visited_nodes.index(u)] = True    # make u a black node
         if (u == end):
             break
     
     ans = []
     #retrace the moves
-    idx = visited_nodes.find(end)
+    idx = visited_nodes.index(end)
     curr_parent = parent[idx]
     ans.append(move_taken[idx])
-    while (curr_parent != None):
-        idx = visited_nodes.find(curr_parent)
-        curr_parent = parent[idx]
-        ans.append(move_taken[idx])
-    
+   # print("ans: ", ans)
+    while (curr_parent != None and parent[curr_parent] != None):
+        ans.append(move_taken[curr_parent])
+        curr_parent = parent[curr_parent]
+    #print (ans)
     return ans[::-1]
     #raise NotImplementedError
 
@@ -62,3 +62,16 @@ def shortest_path_optmized(start, end):
     # simultaneous bfs from both the ends and maintain visted_nodes_1 and 2.
     # when node is discovered while bfs of start check if it is present in visite_nodes_2 and vice versa to check meeting point
     raise NotImplementedError
+
+if __name__ == "__main__":
+    ender = rubik.I
+    starter = rubik.perm_apply(rubik.F,rubik.L)
+    starter = rubik.perm_apply(starter,rubik.U)
+    starter = rubik.perm_apply(starter,rubik.F)
+   # starter = rubik.perm_apply(starter,rubik.I)
+   # starter = rubik.perm_apply(starter,rubik.I)
+    instr = shortest_path(starter,ender)
+    #print(instr)
+    for item in instr:
+        starter = rubik.perm_apply(item,starter)
+    print(starter)
