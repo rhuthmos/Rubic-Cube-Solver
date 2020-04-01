@@ -86,6 +86,8 @@ def shortest_path_optmized(start, end):
     q_back.append(end)
     dist_back[end] = 0
     recover_back[end] = (None,None)
+    # setting up the intersection point
+    intersection_pt = None
 
     # BFS LOOP - runs till both bfs intersect
     done = False
@@ -93,6 +95,10 @@ def shortest_path_optmized(start, end):
     while not done:
         # state to act on in front bfs
         curr = q_front.popleft()
+
+        # If 7 levels have been visited and no intersection,
+        #       no solution.
+        if 7 < dist_front[curr]: break
 
         # visiting all neighbours
         for move in rubik.quarter_twists:
@@ -115,6 +121,10 @@ def shortest_path_optmized(start, end):
         # state to act on in back bfs
         curr = q_back.popleft()
 
+        # If 7 levels have been visited and no intersection,
+        #       no solution.
+        if 7 < dist_back[curr]: break
+
         # visiting all neighbours
         for move in rubik.quarter_twists:
             # find neighbour by applying move
@@ -129,6 +139,9 @@ def shortest_path_optmized(start, end):
                 intersection_pt = neighbour
                 done = True
                 break
+
+    # SPECIAL CASE: No solution
+    if intersection_pt == None: return None
 
     # BACKTRACKING
     # recover moves from start to current state
@@ -151,30 +164,46 @@ def shortest_path_optmized(start, end):
         cube = rubik.perm_apply(move, cube)
     assert cube == end
 
-    return result_path
+    return list(map(lambda x: rubik.quarter_twists_names[x], result_path))
     # raise NotImplementedError
 
 if __name__ == "__main__":
 
-    no_of_scrambling_moves = int(input("Enter how many times to scramble: "))
-    start , end = rubik.I , rubik.I
-    for _ in range(no_of_scrambling_moves):
-        move = __import__('random').choice(rubik.quarter_twists)
-        end  = rubik.perm_apply(move, end)
+    argv = __import__('sys').argv
+    LOCAL = len(argv) >= 2 and argv[1] == 'LOCAL'
+
+    if not LOCAL:
+        parse_tuple = __import__('ast').literal_eval
+        start = raw_input()
+        start = parse_tuple(start[start.find('('):])
+        end   = raw_input()
+        end   = parse_tuple(end[end.find('('):])
+    else:
+        no_of_scrambling_moves = int(input("Enter how many times to scramble: "))
+        start , end = rubik.I , rubik.I
+        for _ in range(no_of_scrambling_moves):
+            move = __import__('random').choice(rubik.quarter_twists)
+            end  = rubik.perm_apply(move, end)
+        print(end)
 
     timer = __import__('timeit').default_timer
 
     start_t = timer()
     fast_path = shortest_path_optmized(start,end)
     end_t = timer()
-    print("Minimum number of moves needed to solve is:", len(fast_path))
 
-    print("Optimised version took", end_t-start_t, "seconds.")
+    if fast_path == None:
+        print("No solution")
+    else:
+        print(fast_path)
+        if LOCAL: print("Minimum number of moves needed to solve is:", len(fast_path))
+
+    if LOCAL: print("Optimised version took", end_t-start_t, "seconds.")
 
     start_t = timer()
     path = shortest_path(start,end)
     end_t = timer()
 
-    print("Non-optimised version took", end_t-start_t, "seconds.")
+    if LOCAL: print("Non-optimised version took", end_t-start_t, "seconds.")
 
     assert len(path) == len(fast_path), "One of the functions reports a longer path than the other."
