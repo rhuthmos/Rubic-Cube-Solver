@@ -184,7 +184,8 @@ if __name__ == "__main__":
         for _ in range(no_of_scrambling_moves):
             move = __import__('random').choice(rubik.quarter_twists)
             end  = rubik.perm_apply(move, end)
-        print(end)
+        print("start =", start)
+        print("end =", end)
 
     timer = __import__('timeit').default_timer
 
