@@ -65,6 +65,9 @@ def shortest_path_optmized(start, end):
     # simultaneous bfs from both the ends and maintain visted_nodes_1 and 2.
     # when node is discovered while bfs of start check if it is present in visite_nodes_2 and vice versa to check meeting point
 
+    # SPECIAL CASE, better not to do all the next if unneeded
+    if start == end: return []
+
     # INITIALISATION
     # returned list of moves
     result_path = []
