@@ -1,0 +1,37 @@
+Why does this difference occur?
+The number of vertices in the bfs tree increases exponentially with the distance from root.
+So, the unoptimised version has to visit a much greater no of nodes so it has to do much more work. The memory requirements also balloon so we start facing I/O related slowdowns.
+
+
+TEST CASE 2:
+INPUT
+start = (6, 7, 8, 20, 18, 19, 3, 4, 5, 16, 17, 15, 0, 1, 2, 14, 12, 13, 10, 11, 9, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+OUTPUT
+['F', 'F', 'Ui', 'L', 'Ui', 'F', 'Li', 'U', 'Li', 'Fi', 'Li', 'U', 'Li', 'Fi']
+Optimised version took 0.231485843658 seconds.
+['F', 'F', 'Ui', 'L', 'Ui', 'F', 'Li', 'U', 'Li', 'Fi', 'Li', 'U', 'Li', 'Fi']
+Non-optimised version took 62.7897188663 seconds.
+
+
+RANDOM INPUT 1:
+INPUT
+start = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+end = (7, 8, 6, 10, 11, 9, 15, 16, 17, 20, 18, 19, 3, 4, 5, 1, 2, 0, 13, 14, 12, 21, 22, 23)
+OUTPUT
+['Ui', 'L', 'Fi', 'U', 'F', 'U', 'F', 'Li', 'Li']
+Optimised version took 0.0539648532867 seconds.
+['Ui', 'Fi', 'L', 'U', 'Li', 'U', 'F', 'U', 'Li']
+Non-optimised version took 9.97774195671 seconds.
+
+
+RANDOM INPUT 2:
+INPUT
+start = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+end = (1, 2, 0, 5, 3, 4, 11, 9, 10, 18, 19, 20, 17, 15, 16, 13, 14, 12, 7, 8, 6, 21, 22, 23)
+OUTPUT
+['L', 'U', 'F', 'Li', 'Ui', 'L', 'Fi', 'Fi', 'U']
+Optimised version took 0.0450410842896 seconds.
+['L', 'U', 'F', 'Li', 'Ui', 'L', 'F', 'F', 'U']
+Non-optimised version took 7.07105994225 seconds.
+
