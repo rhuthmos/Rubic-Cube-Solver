@@ -10,50 +10,51 @@ def shortest_path(start, end):
     Each move can be applied using rubik.perm_apply
     """
 
-    visited_nodes = []
-    status = []
-    parent = []
-    move_taken = []
+    visited_nodes = {}
+   
 
     # initialize
-    visited_nodes.append(start)
-    status.append(False)
-    parent.append(None)
-    move_taken.append(None)
-
-    queue = [start]
+    visited_nodes[start] = 0
+    move_recovery = {}
+    move_recovery[start] = {None, None}
+    no_soln = False
+   
+    queue = __import__('collections').deque()
+    queue.append(start)
+    u = None
     while (len(queue)>0):
-        u = queue.pop(0)
+        u = queue.popleft()
+        if (visited_nodes[u] > 14):
+            # no solution
+            no_soln = True
+            break
         # all neighbours of u
         for moves in rubik.quarter_twists:
             v = rubik.perm_apply(moves, u)
-            #idx = visited_nodes.find(v)
-            # if v is a white node
             if not(v in visited_nodes):
-                visited_nodes.append(v)
-                status.append(False)    # make v a gray naode
-                parent.append(visited_nodes.index(u))    # insert parent
-                move_taken.append(list(moves))    # insert taken move from u to v
+                visited_nodes[v] = visited_nodes[u] + 1
+                move_recovery[v] = (u, moves)
                 queue.append(v)
-        status[visited_nodes.index(u)] = True    # make u a black node
         if (u == end):
             break
-    
+    if (no_soln or u != end):
+        return None
     ans = []
+    if (start == end):
+        return ans
     #retrace the moves
-    idx = visited_nodes.index(end)
-    curr_parent = parent[idx]
-    ans.append(move_taken[idx])
-    while (curr_parent != None and parent[curr_parent] != None):
-        ans.append(move_taken[curr_parent])
-        curr_parent = parent[curr_parent]
+    ptr = end
+    while (ptr != start):
+        ans.append(move_recovery[ptr][1])
+        ptr = move_recovery[ptr][0]
+    ans =  ans[::-1]
 
     # cube = start[:]
     # for move in ans[::-1]:
     #     cube = rubik.perm_apply(move, cube)
     # assert cube == end
 
-    return ans[::-1]
+    return [rubik.quarter_twists_names[x] for x in ans]
     #raise NotImplementedError
 
 def shortest_path_optmized(start, end):
@@ -199,12 +200,16 @@ if __name__ == "__main__":
         print(fast_path)
         if LOCAL: print("Minimum number of moves needed to solve is:", len(fast_path))
 
-    if LOCAL: print("Optimised version took", end_t-start_t, "seconds.")
+    print("Optimised version took", end_t-start_t, "seconds.")
 
     start_t = timer()
     path = shortest_path(start,end)
     end_t = timer()
+    if path == None:
+        print("No solution")
+    else:
+        print(path)
+    print("Non-optimised version took", end_t-start_t, "seconds.")
 
-    if LOCAL: print("Non-optimised version took", end_t-start_t, "seconds.")
-
-    assert len(path) == len(fast_path), "One of the functions reports a longer path than the other."
+    if (path != None and fast_path != None):
+        assert len(path) == len(fast_path), "One of the functions reports a longer path than the other."
