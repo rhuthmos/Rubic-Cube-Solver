@@ -11,23 +11,23 @@ def shortest_path(start, end):
     """
 
     visited_nodes = {}
-   
 
     # initialize
     visited_nodes[start] = 0
     move_recovery = {}
     move_recovery[start] = {None, None}
-    no_soln = False
-   
+
     queue = __import__('collections').deque()
     queue.append(start)
     u = None
+
     while (len(queue)>0):
         u = queue.popleft()
+        if (u == end):
+            break
         if (visited_nodes[u] > 14):
             # no solution
-            no_soln = True
-            break
+            return None
         # all neighbours of u
         for moves in rubik.quarter_twists:
             v = rubik.perm_apply(moves, u)
@@ -35,13 +35,10 @@ def shortest_path(start, end):
                 visited_nodes[v] = visited_nodes[u] + 1
                 move_recovery[v] = (u, moves)
                 queue.append(v)
-        if (u == end):
-            break
-    if (no_soln or u != end):
+    if u != end:
         return None
+
     ans = []
-    if (start == end):
-        return ans
     #retrace the moves
     ptr = end
     while (ptr != start):
@@ -49,10 +46,10 @@ def shortest_path(start, end):
         ptr = move_recovery[ptr][0]
     ans =  ans[::-1]
 
-    # cube = start[:]
-    # for move in ans[::-1]:
-    #     cube = rubik.perm_apply(move, cube)
-    # assert cube == end
+    cube = start[:]
+    for move in ans:
+        cube = rubik.perm_apply(move, cube)
+    assert cube == end
 
     return [rubik.quarter_twists_names[x] for x in ans]
     #raise NotImplementedError
@@ -205,11 +202,15 @@ if __name__ == "__main__":
     start_t = timer()
     path = shortest_path(start,end)
     end_t = timer()
+
     if path == None:
         print("No solution")
     else:
         print(path)
+
     print("Non-optimised version took", end_t-start_t, "seconds.")
 
     if (path != None and fast_path != None):
         assert len(path) == len(fast_path), "One of the functions reports a longer path than the other."
+    else:
+        assert path == None and fast_path == None
