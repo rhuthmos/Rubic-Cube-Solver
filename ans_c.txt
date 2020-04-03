@@ -2,6 +2,16 @@ Why does this difference occur?
 The number of vertices in the bfs tree increases exponentially with the distance from root.
 So, the unoptimised version has to visit a much greater no of nodes so it has to do much more work. The memory requirements also balloon so we start facing I/O related slowdowns.
 
+TEST CASE 1:
+INPUT
+start = (6, 7, 8, 0, 1, 2, 9, 10, 11, 3, 4, 5, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+OUTPUT
+['Fi']
+Optimised version took 0.00312304496765 seconds.
+['Fi']
+Non-optimised version took 0.00016188621521 seconds.
+
 
 TEST CASE 2:
 INPUT
@@ -9,10 +19,19 @@ start = (6, 7, 8, 20, 18, 19, 3, 4, 5, 16, 17, 15, 0, 1, 2, 14, 12, 13, 10, 11, 
 end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
 OUTPUT
 ['F', 'F', 'Ui', 'L', 'Ui', 'F', 'Li', 'U', 'Li', 'Fi', 'Li', 'U', 'Li', 'Fi']
-Optimised version took 0.231485843658 seconds.
+Optimised version took 0.127567052841 seconds.
 ['F', 'F', 'Ui', 'L', 'Ui', 'F', 'Li', 'U', 'Li', 'Fi', 'Li', 'U', 'Li', 'Fi']
-Non-optimised version took 62.7897188663 seconds.
+Non-optimised version took 48.9021711349 seconds.
 
+TEST CASE 3:
+INPUT
+start = (7, 8, 6, 20, 18, 19, 3, 4, 5, 16, 17, 15, 0, 1, 2, 14, 12, 13, 10, 11, 9, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+OUTPUT
+No solution
+Optimised version took 1.53445696831 seconds.
+No solution
+Non-optimised version took 49.8488638401 seconds.
 
 RANDOM INPUT 1:
 INPUT
@@ -34,4 +53,51 @@ OUTPUT
 Optimised version took 0.0450410842896 seconds.
 ['L', 'U', 'F', 'Li', 'Ui', 'L', 'F', 'F', 'U']
 Non-optimised version took 7.07105994225 seconds.
+
+RANDOM INPUT 3:
+start = (18, 19, 20, 14, 12, 13, 17, 15, 16, 4, 5, 3, 11, 9, 10, 8, 6, 7, 0, 1, 2, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+['L', 'U', 'Li', 'U', 'L', 'L', 'F', 'U', 'F', 'Li']
+Minimum number of moves needed to solve is: 10
+Optimised version took 0.0368568897247 seconds.
+['L', 'U', 'Li', 'U', 'L', 'Fi', 'U', 'L', 'F', 'U']
+Non-optimised version took 15.9667520523 seconds.
+
+RANDOM INPUT 4:
+start = (3, 4, 5, 2, 0, 1, 18, 19, 20, 8, 6, 7, 13, 14, 12, 11, 9, 10, 17, 15, 16, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+['L', 'L', 'Fi', 'L', 'U', 'U', 'Li', 'Fi', 'L', 'U', 'Li', 'F']
+Minimum number of moves needed to solve is: 12
+Optimised version took 0.0579559803009 seconds.
+['F', 'U', 'Li', 'Ui', 'Li', 'U', 'Li', 'F', 'Li', 'F', 'L', 'U']
+Non-optimised version took 45.1823079586 seconds.
+
+RANDOM INPUT 5:
+start = (14, 12, 13, 20, 18, 19, 3, 4, 5, 11, 9, 10, 7, 8, 6, 0, 1, 2, 17, 15, 16, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+['F', 'L', 'U', 'Li', 'U', 'U', 'Li', 'Ui', 'F']
+Minimum number of moves needed to solve is: 9
+Optimised version took 0.0258400440216 seconds.
+['F', 'L', 'U', 'Li', 'U', 'U', 'Li', 'Ui', 'F']
+Non-optimised version took 2.91523098946 seconds.
+
+RANDOM INPUT 6:
+start = (5, 3, 4, 17, 15, 16, 12, 13, 14, 9, 10, 11, 1, 2, 0, 18, 19, 20, 7, 8, 6, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+['F', 'F', 'U', 'L', 'U', 'Li', 'U', 'Fi', 'Li', 'Fi', 'U']
+Minimum number of moves needed to solve is: 11
+Optimised version took 0.051008939743 seconds.
+['F', 'F', 'U', 'L', 'U', 'Li', 'U', 'Fi', 'Li', 'Fi', 'U']
+Non-optimised version took 23.9219031334 seconds.
+
+RANDOM INPUT 7:
+Enter how many times to scramble: 35
+start = (14, 12, 13, 11, 9, 10, 0, 1, 2, 20, 18, 19, 7, 8, 6, 3, 4, 5, 17, 15, 16, 21, 22, 23)
+end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+['U', 'Li', 'F', 'F', 'L', 'Fi', 'Li', 'Ui', 'L', 'Ui', 'Fi']
+Minimum number of moves needed to solve is: 11
+Optimised version took 0.0413179397583 seconds.
+['U', 'F', 'L', 'F', 'Li', 'F', 'Li', 'U', 'Fi', 'U', 'L']
+Non-optimised version took 37.3441050053 seconds.
+
 
