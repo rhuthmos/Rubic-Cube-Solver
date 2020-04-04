@@ -57,47 +57,47 @@ Non-optimised version took 7.07105994225 seconds.
 RANDOM INPUT 3:
 start = (18, 19, 20, 14, 12, 13, 17, 15, 16, 4, 5, 3, 11, 9, 10, 8, 6, 7, 0, 1, 2, 21, 22, 23)
 end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-['L', 'U', 'Li', 'U', 'L', 'L', 'F', 'U', 'F', 'Li']
-Minimum number of moves needed to solve is: 10
-Optimised version took 0.0368568897247 seconds.
-['L', 'U', 'Li', 'U', 'L', 'Fi', 'U', 'L', 'F', 'U']
-Non-optimised version took 15.9667520523 seconds.
+['L', 'Fi', 'Ui', 'Fi', 'Li', 'Li', 'Ui', 'L', 'Ui', 'Li']
+Optimised version took 0.0412199497223 seconds.
+['L', 'Fi', 'Ui', 'Fi', 'L', 'L', 'Ui', 'L', 'Ui', 'Li']
+Non-optimised version took 15.6857259274 seconds.
 
 RANDOM INPUT 4:
-start = (3, 4, 5, 2, 0, 1, 18, 19, 20, 8, 6, 7, 13, 14, 12, 11, 9, 10, 17, 15, 16, 21, 22, 23)
-end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-['L', 'L', 'Fi', 'L', 'U', 'U', 'Li', 'Fi', 'L', 'U', 'Li', 'F']
-Minimum number of moves needed to solve is: 12
-Optimised version took 0.0579559803009 seconds.
-['F', 'U', 'Li', 'Ui', 'Li', 'U', 'Li', 'F', 'Li', 'F', 'L', 'U']
-Non-optimised version took 45.1823079586 seconds.
+start=(3, 4, 5, 2, 0, 1, 18, 19, 20, 8, 6, 7, 13, 14, 12, 11, 9, 10, 17, 15, 16, 21, 22, 23)
+end=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
+['Fi', 'L', 'Ui', 'Li', 'F', 'L', 'Ui', 'Ui', 'Li', 'F', 'Li', 'Li']
+Optimised version took 0.0653400421143 seconds.
+['Fi', 'L', 'F', 'U', 'L', 'Ui', 'Fi', 'U', 'Li', 'F', 'L', 'L']
+Non-optimised version took 47.5333459377 seconds.
 
 RANDOM INPUT 5:
 start = (14, 12, 13, 20, 18, 19, 3, 4, 5, 11, 9, 10, 7, 8, 6, 0, 1, 2, 17, 15, 16, 21, 22, 23)
 end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-['F', 'L', 'U', 'Li', 'U', 'U', 'Li', 'Ui', 'F']
-Minimum number of moves needed to solve is: 9
-Optimised version took 0.0258400440216 seconds.
-['F', 'L', 'U', 'Li', 'U', 'U', 'Li', 'Ui', 'F']
-Non-optimised version took 2.91523098946 seconds.
+['Fi', 'U', 'L', 'Ui', 'Ui', 'L', 'Ui', 'Li', 'Fi']
+Optimised version took 0.0262780189514 seconds.
+['Fi', 'Li', 'Ui', 'L', 'U', 'U', 'L', 'U', 'Fi']
+Non-optimised version took 4.26223516464 seconds.
+
 
 RANDOM INPUT 6:
 start = (5, 3, 4, 17, 15, 16, 12, 13, 14, 9, 10, 11, 1, 2, 0, 18, 19, 20, 7, 8, 6, 21, 22, 23)
 end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-['F', 'F', 'U', 'L', 'U', 'Li', 'U', 'Fi', 'Li', 'Fi', 'U']
-Minimum number of moves needed to solve is: 11
-Optimised version took 0.051008939743 seconds.
-['F', 'F', 'U', 'L', 'U', 'Li', 'U', 'Fi', 'Li', 'Fi', 'U']
-Non-optimised version took 23.9219031334 seconds.
+['Ui', 'F', 'L', 'F', 'Ui', 'L', 'Ui', 'Li', 'Ui', 'Fi', 'Fi']
+Optimised version took 0.0528700351715 seconds.
+['U', 'F', 'F', 'Li', 'F', 'L', 'F', 'F', 'U', 'L', 'U']
+Non-optimised version took 37.3080511093 seconds.
 
 RANDOM INPUT 7:
 Enter how many times to scramble: 35
 start = (14, 12, 13, 11, 9, 10, 0, 1, 2, 20, 18, 19, 7, 8, 6, 3, 4, 5, 17, 15, 16, 21, 22, 23)
 end = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-['U', 'Li', 'F', 'F', 'L', 'Fi', 'Li', 'Ui', 'L', 'Ui', 'Fi']
-Minimum number of moves needed to solve is: 11
-Optimised version took 0.0413179397583 seconds.
-['U', 'F', 'L', 'F', 'Li', 'F', 'Li', 'U', 'Fi', 'U', 'L']
-Non-optimised version took 37.3441050053 seconds.
+['F', 'U', 'Li', 'U', 'L', 'F', 'Li', 'Fi', 'Fi', 'L', 'Ui']
+Optimised version took 0.0589530467987 seconds.
+['F', 'U', 'Li', 'U', 'L', 'F', 'Li', 'F', 'F', 'L', 'Ui']
+Non-optimised version took 29.9402580261 seconds.
+
+By:
+Rhythm Gupta 2018082
+Sanyam Agrawal  2018261
 
 

@@ -175,9 +175,9 @@ if __name__ == "__main__":
 
     if not LOCAL:
         parse_tuple = __import__('ast').literal_eval
-        start = raw_input()
+        start = raw_input("start = ")
         start = parse_tuple(start[start.find('('):])
-        end   = raw_input()
+        end   = raw_input("end = ")
         end   = parse_tuple(end[end.find('('):])
     else:
         no_of_scrambling_moves = int(input("Enter how many times to scramble: "))
@@ -185,8 +185,9 @@ if __name__ == "__main__":
         for _ in range(no_of_scrambling_moves):
             move = __import__('random').choice(rubik.quarter_twists)
             end  = rubik.perm_apply(move, end)
-        print("start =", end)
-        print("end =", start)
+        print("start =", start)
+        print("end =", end)
+        start, end = end, start
 
     timer = __import__('timeit').default_timer
 
